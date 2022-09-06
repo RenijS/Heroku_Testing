@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main</title>
+    <link rel="stylesheet" href="/css/mainStyle.css" />
+  </head>
+  <body>
+    <h2>Main Page</h2>
+    <section class="notifSection">
+      <div class="switch">
+        <button id="addSwitch" class="active">Add Reminder</button>
+        <button id="upcomingSwitch">Upcoming Reminder</button>
+      </div>
+      <section class="addWrapper">
+        <form action="/newEvent" method="post" class="addSection">
+          <input type="text" placeholder="title" id="title" name="title" />
+          <div class="dateSection">
+            <div class="start">
+              <label for="startTime">Start</label>
+              <input type="datetime-local" name="startTime" id="startTime" />
+            </div>
+            <div class="end">
+              <label for="endTime">End</label>
+              <input type="datetime-local" name="endTime" id="endTime" />
+            </div>
+          </div>
+          <div class="noteSection">
+            <label for="notes">Notes</label>
+            <textarea name="notes" id="notes" cols="30" rows="5"></textarea>
+          </div>
+          <button id="addBtn">Add</button>
+        </form>
+      </section>
+      <section class="upcomingSection displayGone">
+        <div>
+          <ul class="upcomingList">
+            <% for(let event of events){%>
+            <li>
+              <p><%=event.title%></p>
+              <p><%=event.startTime%></p>
+              <p><%=event.endTime%></p>
+            </li>
+            <%}%>
+          </ul>
+        </div>
+      </section>
+    </section>
+
+    <!--JS-->
+    <script src="js/mainJs.js"></script>
+  </body>
+</html>
