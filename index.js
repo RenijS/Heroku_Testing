@@ -6,10 +6,14 @@ const path = require("path");
 const methodOverride = require("method-override");
 
 const mongoose = require("mongoose");
+require("dotenv").config();
 const Event = require("./models/event");
 
 mongoose
-  .connect("mongodb://localhost:27017/reminderEvent")
+  .connect(process.env.DATABASE, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("Mongo Conection Open!");
   })
@@ -38,4 +42,6 @@ app.post("/newEvent", async (req, res) => {
   res.redirect("/");
 });
 
-http.createServer(app).listen(port);
+app.listen(port, () => {
+  console.log(`Listening at port ${port}`);
+});
